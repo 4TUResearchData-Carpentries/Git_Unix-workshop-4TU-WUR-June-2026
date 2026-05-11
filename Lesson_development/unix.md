@@ -14,6 +14,8 @@ And as Alfred North Whitehead wrote in 1911, 'Civilization advances by
 extending the number of important operations which we can perform
 without thinking about them.'
 
+- `export PS1="$ "` to clear long name before the commands
+
 ## 09:30–09:40 (10 min) — Introducing the Shell
 
 **Goals:** what the shell is, prompt, first `ls`.
