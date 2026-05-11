@@ -1,13 +1,12 @@
 # Introduction to version control with Git 
 
-Welcome to the **Git & Unix workshop**! for Eindhoven University of Technology, on 22-23 April 2026.  This repository contains instructions for the two-day hands-on workshop focused on **how to interact with the Unix terminal**, **version control with Git**, **collaborative best practices**, and **getting to know [4TU.ResearchData](data.4tu.nl)**.
+Welcome to the **Git & Unix workshop**! for Wageningen University of Technology, on 22-23 June 2026.  This repository contains instructions for the two-day hands-on workshop focused on **how to interact with the Unix terminal**, **version control with Git**, **collaborative best practices**, and **getting to know [4TU.ResearchData](data.4tu.nl)**.
 
-[![schema.org Course](https://img.shields.io/badge/schema--org-Course-blue.svg)](./schema-course.jsonld)
 
 **Links:**
 
 <!-- - Mentimeter Git Intro- https://edu.nl/cma84 -->
-- Collaborative notes- https://hackmd.io/W5GSXeJ_RJOE0DE0UsW5AA 
+- Collaborative notes- https://hackmd.io/zk0YPkvKRTOU4tPj2ZckzQ
 
 ## 🚀 Workshop Overview
 
@@ -61,9 +60,11 @@ Before attending the workshop, please ensure you have:
 
 - **[Unix Lesson](Lesson_development/unix.md)** : Introduction to Unix to navigate your file system , create documents , visualize data, make loops and scripts. 
 
-- **[Git Lesson](Lesson_development/git_lesson_verbosed_structure.md)**: Introduction to Git, tracking changes, and collaborating on research projects.
+- **[Git Lesson Day One](Lesson_development/git_local_day_1.md)**: Introduction to Git , tracking changes and exploring the history.
 
-- [Collaborative document](https://edu.nl/htaw9)
+- **[Git Lesson Day Two](Lesson_development/git_remotes_day_2.md)**: Introduction to Git remotes collaborating on research projects.
+
+- [Collaborative document](https://hackmd.io/zk0YPkvKRTOU4tPj2ZckzQ)
 
 
 ## 🔗 Resources
