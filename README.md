@@ -42,10 +42,10 @@ This workshop is designed to introduce participants to **Git and version control
 
 ## 🛠 Prerequisites
 Before attending the workshop, please ensure you have:
-- A **GitHub account** ([sign up here](https://github.com/))
+
 - Installed **Git** on your system ([installation guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git))
 - A **terminal** or **Git Bash** (Windows users should install [Git for Windows](https://gitforwindows.org/))
-- A basic understanding of Unix shell commands. See [here](https://swcarpentry.github.io/shell-novice/02-filedir.html)
+
 
 ### Why teach Git on the command-line (Unix shell) rather than with a GUI (Graphical User Interface)?:
 
