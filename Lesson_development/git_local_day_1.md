@@ -14,7 +14,7 @@ export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 tail -f ~/.bash_history
 
 # Clear history if needed
-dhistory -c
+history -c
 ```
 
 For Windows/WSL setup:
@@ -68,14 +68,10 @@ git config --global user.email "your@email.com"
 
 Comments:
 - Use the email associated with your GitHub, GitLab, Bitbucket, etc., account.
-
 - Ensures commits are linked to your user profile.
-
 - Enables activity tracking, avatars, and contribution graphs.
-
 - If using Git in a university/research group context:
-
-    - Use your institutional email if commits should be traceable to that identity.
+ - Use your institutional email if commits should be traceable to that identity.
 
 ### Configure line endings:
 
@@ -84,6 +80,16 @@ Comments:
 git config --global core.autocrlf true
 # Mac/Linux
 git config --global core.autocrlf input
+```
+
+### Default branch name
+
+By default Git will create a branch called master when you create a new repository with git init. From Git version 2.28 onwards, you can set a different name for the initial branch
+
+```bash
+
+git config --global init.defaultBranch main
+
 ```
 
 ### Check configuration:
@@ -101,6 +107,7 @@ mkdir patients
 cd patients
 git init
 ```
+This creates a new subdirectory named .git that contains all of your necessary repository files — a Git repository skeleton. At this point, nothing in your project is tracked yet.
 
 Verify repo status:
 
@@ -140,11 +147,15 @@ Check status:
 git status
 ```
 
-Track and commit:
+Track and commit (to the unmodified state):
 
 ```bash
-git add calculate_mean.py
+git add calculate_mean.py # git add is a multipurpose command for start tracking a file and stage it (once it is already track). It may be helpful to think of it more as “add precisely this content to the next commit” rather than “add this file to the project”
 # Git may show CRLF warning (safe to ignore)
+
+
+
+# commit the file
 git commit -m "create script for analysis"
 ```
 
@@ -166,24 +177,37 @@ Output: The mean of the array
 Check and review differences:
 
 ```bash
-git status
-git diff
+git status # you want to know which files you have changed
+git diff  #you want to know exactly what you changed, not just which files were changed 
 ```
+
+`git diff` command compares what is in your working directory with what is in your staging area. The result tells you the changes you’ve made that you haven’t yet staged.
 
 Add and commit the changes:
 
 ```bash
 git add calculate_mean.py
-git diff --staged
+
+
+##(optional)
+
+# add another change to calculate_mean.py and run git status 
+
+# What the heck? Now calculate_mean.py is listed as both staged and unstaged. How is that possible? It turns out that Git stages a file exactly as it is when you run the git add command. If you commit now, the version of calculate_mean.py as it was when you last ran the git add command is how it will go into the commit, not the version of the file as it looks in your working directory when you run git commit. If you modify a file after you run git add, you have to run git add again to stage the latest version of the file
+
+
+git add calculate_mean.py
+```
+
+Check and review differences:
+
+```bash
+git diff --staged # if you want to see what you’ve staged that will go into your next commit, you can use git diff --staged. This command compares your staged changes to your last commit
 git commit -m "add docstring"
 ```
 
-```bash
+Remember that the **commit records the snapshot you set up in your staging area**. Anything you didn’t stage is still sitting there modified; you can do another commit to add it to your history. **Every time you perform a commit, you’re recording a snapshot of your project that you can revert to or compare to later.**
 
-git show # it will show by default what was done in the last commit
-
-```
----
 
 ### 📁 Step 5: Working with Empty Directories \[4 min]
 
@@ -200,7 +224,7 @@ Add files to track the folder:
 
 ```bash
 touch treatments/aspirin.txt treatments/advil.txt
-git add treatments/
+git add treatments/ # track all folder recursively
 git commit -m "add some treatments for patients"
 ls -R
 ```
@@ -244,19 +268,22 @@ git status --ignored
 
 ## 🧪 Hands-On Exercise: Modify, Add, Commit \[15 min]
 
-> Instructor Note: Use breakout groups. Let participants try each step, then show the solution. Each task: 1–2 minutes.
+> Show the slide with the exercise
 
 Assignment:
 
 **Create new repository and use the modify-add-commit cycle.**
 - Create and initialize a repository called ‘my-repo’
 - Create a file ‘research.txt’ with the sentence “Science is awesome”.
-- Add and commit the changes. Remember to use a meaningful message.
+- Track the file and commit the changes. Remember to use a meaningful message.
 - Change sentence in ‘research.txt’ to “Science is messy”
-Add and commit.
+- Stage the change and commit.
 - Create a folder called “raw-data”
 - Ignore the raw-data folder and commit it 
-- ( bonus) Check your history log – you should have 3 commits. 
+- Check the history of your project and verify the number of commits. 
+
+
+Invite someone to do it lively
 
 
 Steps:
@@ -286,6 +313,8 @@ git log --oneline --graph
 ## 🔍 Part 2: Exploring Git History \[16 min]
 
 ### a. View the Log
+
+By default, with no arguments, git log lists the commits made in that repository in reverse chronological order; that is, the most recent commits show up first. As you can see, this command lists each commit with its SHA-1 checksum, the author’s name and email, the date written, and the commit message.
 
 ```bash
 git log
@@ -356,6 +385,8 @@ Revert to last commit:
 git restore calculate_mean.py
 cat calculate_mean.py
 ```
+It’s important to understand that git restore <file> is a dangerous command. Any local changes you made to that file are gone — Git just replaced that file with the last staged or committed version. Don’t ever use this command unless you absolutely know that you don’t want those unsaved local changes.
+
 
 Revert to specific commit:
 
