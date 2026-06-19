@@ -1,27 +1,28 @@
 
-## 🛰️ Day 2: Working with Remotes and Collaborating on GitHub
+## 🛰️ Day 2: Working with Remotes and Collaborating on Gitlab WUR instance
 
 ### 🧭  — Recap of local Git
 ### 🧭  — Intro to Remotes
 ### 🧭  — Push/Pull
 
-> **Instructor Note:** Introduce the idea of remote repositories using slides. Explain what GitHub is, how it connects to local repositories, and why remotes are important for collaboration and backup.
+> **Instructor Note:** Introduce the idea of remote repositories using slides. Explain what Gitlab WUR instance is, how it connects to local repositories, and why remotes are important for collaboration and backup.
 
 ---
 
-### 🌐 Connecting to GitHub \[20 min]
+### 🌐 Connecting to Gitlab WUR instance \[20 min]
 
-#### a. Create a GitHub Repository
+#### a. Create a Gitlab WUR instance Repository
 
-> Ask participants to log into GitHub and create an **empty public repository** named `patients-analysis`.
+> Ask participants to log into Gitlab WUR instance and create an **empty public repository** named `patients-analysis`.
 
 * Description suggestion: *Analysis of different clinical treatments*
+* Instructor should ensure that the Issues are enabled when you create the repository
 
 #### b. Connect Local Repo to Remote
 
-##### b0. SSH Setup for GitHub Access (**Technical Break**, 30 min)
+##### b0. SSH Setup for Gitlab WUR instance Access (**Technical Break**, 30 min)
 
-> **Instructor Note:** Use slides or a diagram to explain SSH authentication, its benefits over HTTPS, and GitHub’s two-factor authentication requirements.
+> **Instructor Note:** Use slides or a diagram to explain SSH authentication, its benefits over HTTPS, and Gitlab WUR instance’s two-factor authentication requirements.
 
 Steps to generate and configure an SSH key:
 
@@ -33,8 +34,8 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 
 ✅ **Email requirements:**
 
-* The email in this command doesn't need to match your GitHub account.
-* Still, using a verified GitHub email is recommended for clarity and organization.
+* The email in this command doesn't need to match your Gitlab WUR instance account.
+* Still, using a verified Gitlab WUR instance email is recommended for clarity and organization.
 
 Check generated files:
 
@@ -57,7 +58,7 @@ clip < ~/.ssh/id_ed25519.pub  # Windows
 cat ~/.ssh/id_ed25519.pub     # For manual copy
 ```
 
-On GitHub:
+On Gitlab WUR instance:
 
 * Go to **Settings → SSH and GPG keys → New SSH key**
 * Paste the key and name it clearly (e.g., `workshop-laptop`)
@@ -65,13 +66,13 @@ On GitHub:
 Test the SSH connection:
 
 ```bash
-ssh -T git@github.com
+ssh -T git@git.wur.nl 
 ```
 
 🔗 Resources:
 
-* [GitHub SSH Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
-* [Troubleshooting SSH](https://docs.github.com/en/authentication/troubleshooting-ssh)
+* [Gitlab WUR instance SSH Docs](https://docs.gitlab.com/user/ssh/)
+* [Troubleshooting SSH](https://docs.gitlab.com/user/ssh_troubleshooting/)
 
 #### b1. Add the Remote and Push
 
@@ -84,7 +85,7 @@ cd ~/Desktop/patients
 Link to the remote repository:
 
 ```bash
-git remote add origin git@github.com:<your-username>/patients-analysis.git
+git remote add origin git@git.wur.nl.com:<your-username>/patients-analysis.git
 git remote -v
 ```
 
@@ -105,9 +106,9 @@ git pull origin main
 
 ---
 
-### 🖥️ Optional: Explore GitHub Web GUI
+### 🖥️ Optional: Explore Gitlab WUR instance Web GUI
 
-> **Instructor Note:** Quickly tour the GitHub interface: file browser, commit history, branches, issues, pull requests.
+> **Instructor Note:** Quickly tour the Gitlab WUR instance interface: file browser, commit history, branches, issues, pull requests.
 
 ---
 
@@ -121,21 +122,21 @@ Invite participants to join `workshop-check-in` repo as collaborators before res
 
 ### a. Clone a Shared Repository
 
-> Instructor shares repo URL: `https://github.com/leilaicruz/workshop-checkin`
+> Instructor shares repo URL: `https://git.wur.nl/lingtong.gai/workshop-checkin`
 
 Clone it locally:
 
 ```bash
 cd ~/Desktop
-git clone git@github.com:leilaicruz/workshop-checkin.git
+git clone git@git.wur.nl:lingtong.gai/workshop-checkin.git
 ```
 
 > **Instructor Note:** Now contrast cloning vs forking using the table below.
 
 | Aspect                | 🌀 Cloning                      | 🍴 Forking                               |
 | --------------------- | ------------------------------- | ---------------------------------------- |
-| **What it does**      | Local copy of existing repo     | Your own copy under your GitHub account  |
-| **Who owns the repo** | The original owner              | You (your GitHub username)               |
+| **What it does**      | Local copy of existing repo     | Your own copy under your Gitlab WUR instance account  |
+| **Who owns the repo** | The original owner              | You (your Gitlab WUR instance username)               |
 | **Use case**          | Team projects with write access | Contributing to external/public projects |
 | **How to contribute** | Direct push or PRs to original  | PRs from fork to upstream                |
 | **Remote origin**     | Points to source repo           | Points to your fork                      |
@@ -183,7 +184,7 @@ git commit -m "add check-in info"
 git push origin <your-branch-name>
 ```
 
-> Instructor can then demonstrate how to open a Pull Request (PR) via the GitHub interface.
+> Instructor can then demonstrate how to open a Pull Request (PR) via the Gitlab WUR instance interface.
 
 ---
 
@@ -196,9 +197,15 @@ git push origin <your-branch-name>
 1. Owner writes an issue about something is not working in the code.
 2. Collaborator forks , clone , make a new branch, solve the issue and push it to the fork and create a PR.
 3. Owner sees the peer and tries it locally before it can be merged.
-   `git fetch origin pull/123/head:pr-123` 123 is the name of the PR
-   `git checkout pr-123`
-4. Owner goes to the website and merge the PR to main.
+   `git fetch origin merge-requests/123/head:mr-123` 123 is the number after the `!` of the MR, and `mr-123` is the name of the branch created for that MR
+   `git switch mr-123`
+4. To inspect which files has been changed in the MR , locally :
+   `git diff --name-only origin/main...mr-123`
+
+5. To see which changes has been inside the file:
+`git diff origin/main...mr-123 -- path2file`
+
+4. Owner accept the change and write a kind message to the collaborator and then merge the MR to main. 
 
 - explain visually what happens.
 
@@ -214,11 +221,13 @@ git push origin <your-branch-name>
 
    * Clone or fork each other’s repositories. 
    * Create a branch, solve the issue.
-   * Open a Pull Request with your changes.
+   * Open a Merge Request with your changes.
 
-3. Review and integrate PRs if possible.
+3. Review and integrate the MR if possible.
 
-4. Reflect:
+4. Change roles 
+
+5. Reflect:
 
    * What worked well?
    * What was confusing?
@@ -231,12 +240,12 @@ git push origin <your-branch-name>
 
 > Instructor Note: Briefly explain why software licensing matters for reuse and collaboration.
 
-* Share TU Delft software template repo: [https://github.com/manuGil/fair-code](https://github.com/manuGil/fair-code)
 
 Encourage:
 
 * Adding a LICENSE file
-* Including CITATION metadata in the repo
+* Including CITATION metadata in the repo : https://citation-file-format.github.io/cff-initializer-javascript/#/
+
 
 ---
 
